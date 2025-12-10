@@ -42,7 +42,8 @@ def recommend(payload: RecommendRequest):
                 "count": i["tomatometer_count"]
             },
             snippets=i["snippets"],
-            link=i["link"]
+            link=i["link"],
+            poster=i.get("poster"),
         )
         for i in augmented
     ]

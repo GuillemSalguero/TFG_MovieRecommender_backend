@@ -1,5 +1,8 @@
 from collections import defaultdict
 from typing import Dict
+from src.clients.tmdb_client import TMDBClient
+from src.config import settings
+tmdb_client = TMDBClient()
 
 def augment_results(chroma_res: Dict, meta_lookup, max_results=5, max_runtime=None):
     docs = chroma_res["documents"][0]
@@ -45,4 +48,13 @@ def augment_results(chroma_res: Dict, meta_lookup, max_results=5, max_runtime=No
         })
 
     enriched.sort(key=lambda x: x["score"], reverse=True)
-    return enriched[:max_results]
+    
+    final_results = enriched[:max_results]
+    
+    for movie in final_results:
+    # Recuperamos el título que guardamos antes
+        titulo = movie.get("title") or ""
+        movie["poster"] = tmdb_client.get_poster_url(titulo)
+
+    # 6. Devolvemos la lista completa y bonita
+    return final_results
