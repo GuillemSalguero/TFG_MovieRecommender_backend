@@ -15,6 +15,7 @@ class RAResult(BaseModel):
     score: float
     signals: dict
     snippets: List[str]
+    poster: Optional[str] = None
     link: str
 
 class RecommendResponse(BaseModel):

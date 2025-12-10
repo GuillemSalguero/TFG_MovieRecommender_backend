@@ -7,7 +7,10 @@ class Settings(BaseSettings):
     SUPABASE_URL: str
     SUPABASE_KEY: str
     TOP_K: int = 5
+    TMDB_API_KEY: str = "1ecb334da1e4a8ee1e5b730459c80e95"
 
+    # Puedes añadir otras configuraciones globales aquí
+    IDIOMA_RESPUESTA: str = "es-ES"
     # Configuración para Pydantic v2
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -15,3 +18,4 @@ class Settings(BaseSettings):
     )
 
 settings = Settings()
+
